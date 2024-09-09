@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const question = document.getElementById('questionInput').value;
     
-    resultDiv.textContent = 'Analyzing...';
+    resultDiv.innerHTML = '<p>Analyzing...</p>';
     
     try {
       const response = await fetch('/api/ask', {
@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       const data = await response.json();
-      resultDiv.textContent = data.result;
+      resultDiv.innerHTML = marked.parse(data.result);
     } catch (error) {
       console.error('Error:', error);
-      resultDiv.textContent = 'An error occurred while processing your request.';
+      resultDiv.innerHTML = '<p>An error occurred while processing your request.</p>';
     }
   });
 });

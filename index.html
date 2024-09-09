@@ -11,20 +11,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ameer's AllerGenie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
   <main>
-    <h1 class="title">Ameer's AllerGenie 🧞‍♂️</h1>
-    <p class="description">Ask about a product's safety or request recommendations</p>
-    
-    <form id="questionForm">
-      <input type="text" id="questionInput" placeholder="Enter your question here" required>
-      <button type="submit">Ask</button>
-    </form>
+    <div class="container">
+      <h1 class="title">Ameer's AllerGenie <span class="genie">🧞‍♂️</span></h1>
+      <p class="description">Ask about a product's safety or request recommendations</p>
+      
+      <form id="questionForm">
+        <input type="text" id="questionInput" placeholder="Enter your question here" required>
+        <button type="submit">Ask</button>
+      </form>
 
-    <div id="result" class="result"></div>
+      <div id="result" class="result"></div>
+    </div>
   </main>
 
   <script type="module" src="script.js"></script>

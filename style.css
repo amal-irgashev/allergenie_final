@@ -1,164 +1,139 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-main {
-  min-height: 100vh;
-  padding: 4rem 2rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
+:root {
+  --orange: #FF8C00;
+  --dark-orange: #FF6200;
+  --light-gray: #f0f0f0;
+  --white: #ffffff;
+  --black: #333333;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
+  background-color: var(--light-gray);
+  color: var(--black);
+}
+
+main {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f0f0;
+  padding: 1rem;
 }
 
-main {
-  background-color: white;
+.container {
+  background-color: var(--white);
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   width: 100%;
 }
 
 .title {
-  color: #333;
+  color: var(--orange);
   text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.genie {
+  font-size: 3rem;
+  vertical-align: middle;
 }
 
 .description {
-  color: #666;
+  color: var(--black);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
 }
 
 form {
   display: flex;
+  flex-direction: column;
   margin-bottom: 1.5rem;
 }
 
 input[type="text"] {
-  flex-grow: 1;
-  padding: 0.5rem;
+  padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px;
+  border: 2px solid var(--light-gray);
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--orange);
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  background-color: #0070f3;
-  color: white;
+  background-color: var(--orange);
+  color: var(--white);
   border: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0051a2;
+  background-color: var(--dark-orange);
 }
 
 .result {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background-color: var(--light-gray);
+  border-radius: 8px;
   padding: 1rem;
-  white-space: pre-wrap;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.result h1, .result h2, .result h3 {
+  color: var(--orange);
+}
+
+.result ul, .result ol {
+  padding-left: 1.5rem;
+}
+
+.result a {
+  color: var(--dark-orange);
+  text-decoration: none;
+}
+
+.result a:hover {
+  text-decoration: underline;
+}
+
+/* Glow effect */
+.title, button {
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+button {
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+}
+
+@media (min-width: 601px) {
+  form {
+    flex-direction: row;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    margin-bottom: 0;
+    border-radius: 8px 0 0 8px;
+  }
+
+  button {
+    border-radius: 0 8px 8px 0;
+  }
 }
