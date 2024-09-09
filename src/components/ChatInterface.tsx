@@ -18,13 +18,23 @@ const ChatInterface: React.FC = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question: query }),
         });
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
         const data = await res.json();
-        setResponse(data.result);
+        if (data && data.result) {
+          setResponse(data.result);
+        } else {
+          throw new Error('Unexpected response structure');
+        }
       } catch (error) {
         console.error('Error:', error);
-        setResponse('An error occurred while processing your request.');
+        setResponse(`An error occurred while processing your request: ${error.message}`);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
   };
 
