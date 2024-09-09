@@ -38,6 +38,14 @@ const ChatInterface: React.FC = () => {
     // Implement barcode scanning logic here
   };
 
+  // Custom renderer for marked to style links
+  const renderer = new marked.Renderer();
+  renderer.link = (href, title, text) => {
+    return `<a href="${href}" title="${title || ''}" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-600 hover:underline">${text}</a>`;
+  };
+
+  marked.setOptions({ renderer });
+
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900">
       <header className="p-6 border-b border-gray-200">
@@ -50,12 +58,15 @@ const ChatInterface: React.FC = () => {
       <main className="flex-grow flex flex-col p-6 max-w-2xl mx-auto w-full">
         <div className="flex-grow flex items-center justify-center mb-6">
           {response ? (
-            <div className="w-full p-6 bg-gray-50 rounded-lg border border-gray-200 animate-fade-in-up">
-              <h3 className="text-lg font-medium mb-2 flex items-center space-x-2">
-                <Sparkles className="w-5 h-5 text-blue-500" />
+            <div className="w-full p-6 bg-gray-50 rounded-lg border border-gray-200 animate-fade-in-up shadow-md">
+              <h3 className="text-lg font-medium mb-4 flex items-center space-x-2 text-blue-600">
+                <Sparkles className="w-5 h-5" />
                 <span>Allergenie Response:</span>
               </h3>
-              <div dangerouslySetInnerHTML={{ __html: marked(response) }} className="text-gray-700" />
+              <div 
+                dangerouslySetInnerHTML={{ __html: marked(response) }} 
+                className="text-gray-700 prose prose-sm max-w-none"
+              />
             </div>
           ) : (
             <div className="text-center text-gray-500">
@@ -103,7 +114,7 @@ const ChatInterface: React.FC = () => {
       </main>
 
       <footer className="p-4 text-center text-gray-500 text-sm border-t border-gray-200">
-        © 1992 Ameer's Nipples. All balls preserved.
+        © 2023 Allergenie. All rights reserved.
       </footer>
     </div>
   );
