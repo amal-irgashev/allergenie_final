@@ -18,12 +18,23 @@ const ChatInterface: React.FC = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question: query }),
         });
-        
+  
+        // Check for HTTP errors
         if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+          const errorData = await res.json().catch(() => null);
+          throw new Error(`Server error: ${errorData?.error || res.statusText}`);
         }
-        
-        const data = await res.json();
+  
+        // Read the response text
+        const responseText = await res.text();
+  
+        // Check if the response is empty
+        if (!responseText) {
+          throw new Error("Empty response from server");
+        }
+  
+        // Attempt to parse the response as JSON
+        const data = JSON.parse(responseText);
         if (data && data.result) {
           setResponse(data.result);
         } else {
@@ -31,7 +42,13 @@ const ChatInterface: React.FC = () => {
         }
       } catch (error) {
         console.error('Error:', error);
-        setResponse(`An error occurred while processing your request: ${error.message}`);
+  
+        // Set a user-friendly error message
+        let errorMessage = 'An error occurred while processing your request.';
+        if (error instanceof Error) {
+          errorMessage += ` ${error.message}`;
+        }
+        setResponse(errorMessage);
       } finally {
         setIsLoading(false);
       }

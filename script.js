@@ -17,15 +17,25 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ question }),
       });
       
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      const responseText = await response.text();
+      console.log('Raw response:', responseText);
+      
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        throw new Error('Failed to parse JSON response');
       }
       
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`${data.error}: ${data.details} (${data.type})`);
+      }
+      
       resultDiv.innerHTML = marked.parse(data.result);
     } catch (error) {
       console.error('Error:', error);
-      resultDiv.innerHTML = '<p>An error occurred while processing your request.</p>';
+      resultDiv.innerHTML = `<p>An error occurred: ${error.message}</p>`;
     }
   });
 });
